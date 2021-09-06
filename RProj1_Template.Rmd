@@ -23,7 +23,9 @@ The Dataaurus Dozen data contains 12 datasets in a dataframe consisting of 1846 
 
 #### The Dino Plot Visualized
 
-```{r plot-dino, fig.height=3, fig.width=6}
+The data visualized shows a picutre of a dinosaur with a certain set of summary statistics, e.g mean, standard deviation, et cetera that should be noted.
+
+```{r plot-dino, fig.height=5, fig.width=5}
 dino_data <- datasaurus_dozen %>%
   filter(dataset == "dino")
 ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
@@ -32,6 +34,8 @@ ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
 
 #### The Correlation Coefficient
 
+This measurement shows a ***linear*** relationship between the x and y values. The nearer the value is to 0, the lesser the linear relationship.
+
 ```{r cor-dino}
 dino_data %>%
   summarize(r = cor(x, y))
@@ -39,21 +43,23 @@ dino_data %>%
 
 ### Exercise 3
 
-(Add code and narrative as needed. Note that the R chunks are labeled with `plot-star` and `cor-star` to provide spaces to place the code for plotting and calculating the correlation coefficient. To finish, remember to clean up the narrative by removing these instructions.)
+#### The Star Plot Visualized
+
+This data visualized maintains the nearly identical summary statistics as the Dino Plot above, but has a drastically different visual representaiton.
 
 
-
-```{r plot-star}
-
-
+```{r plot-star, fig.height=5, fig.width=5}
+star_data <- datasaurus_dozen %>% filter(dataset == "star")
+ggplot(data = star_data, mapping = aes(x = x, y = y)) + geom_point()
 ```
 
-I'm some text, you should replace me with more meaningful text...
+#### The Correlation Coefficient
  
 ```{r cor-star}
-
-
+dino_data %>% summarize(r = cor(x,y))
 ```
+
+Here we see that the ***linear*** relationship of the data is equal to the above plot.
 
 ### Exercise 4
 
