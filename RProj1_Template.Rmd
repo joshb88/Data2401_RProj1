@@ -59,21 +59,26 @@ ggplot(data = star_data, mapping = aes(x = x, y = y)) + geom_point()
 dino_data %>% summarize(r = cor(x,y))
 ```
 
-Here we see that the ***linear*** relationship of the data is equal to the above plot.
+Here we see that the ***linear*** relationship of the data is equal to the above plot. This expresses the same linear relationship as the dinosaur despite having a markedly different visualization of the data.
 
 ### Exercise 4
 
-(Add code and narrative as needed. Note that two R chunks are given but they are not labeled. Use the convention from above to name them appropriately.)
+#### The Circle Plot Visualized
 
-```{r}
+Here again we find yet another visualization that's vastly different from the prior two, yet has nearly identical summary statistics.
 
-
+```{r plot-circle, fig.height=5, fig.width=5}
+circle_data <- datasaurus_dozen %>% filter(dataset == "circle")
+ggplot(data = circle_data, mapping = aes(x=x,y=y)) + geom_point()
 ```
 
-```{r}
+#### The Correlation Coefficient
 
-
+```{r cor-circle}
+dino_data %>% summarize(r = cor(x,y))
 ```
+
+As could be expected, there is nearly no ***linear*** relationship between the variables x and y, and that relationship is exactly the same as the rest.
 
 ### Exercise 5
 
