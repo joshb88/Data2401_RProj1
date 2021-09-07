@@ -2,24 +2,51 @@
 title: "R Project 1 - Hello R"
 author: "Joshua Boehm"
 date: "Due September 8th"
-output: html_document
+output: 
+  html_document: 
+    fig_width: 6
+    fig_height: 6
+    theme: simplex
+    highlight: kate
 --- 
 
+&nbsp;
+&nbsp;
+&nbsp;
 
+## Load packages
 
-### Load packages
 
 ```{r load-packages, message=FALSE}
 library(tidyverse) 
 library(datasauRus)
 ```
 
+&nbsp;
 
-### Exercise 1
+## Exercise 1
 
-The Dataaurus Dozen data contains 12 datasets in a dataframe consisting of 1846 rows and 3 variables: dataset, which indicates which data set the data is sourced; x, for x-values; and y, for y-values.
+&nbsp;
 
-### Exercise 2
+The Datasaurus Dozen contains 13 datasets (including the datasaur itself) in a data frame consisting of 1846 rows and 3 variables: dataset, indicating from which data set the data is sourced; x, for x-values; and y, for y-values. These data sets have the same summary statistics, i.e. x/y mean, x/y standard deviation, and the Pearson's correlation.
+
+```{r}
+ datasaurus_dozen %>% count(dataset) %>% print(26)
+```
+
+&nbsp;
+
+In the table below, we see these standard measures are equal to the hundredths for all 13 of the data sets.
+
+```{r}
+datasaurus_dozen %>% group_by(dataset) %>% summarize('x-mean' = mean(x = x),'y-mean' = mean(x = y), 'x sd' = sd(x), 'y sd' = sd(x = y), "Pearson's Correlation" = cor(x,y)) %>% print()
+```
+
+&nbsp;
+
+## Exercise 2
+
+&nbsp;
 
 #### The Dino Plot Visualized
 
@@ -41,7 +68,11 @@ dino_data %>%
   summarize(r = cor(x, y))
 ```
 
-### Exercise 3
+&nbsp;
+
+## Exercise 3
+
+&nbsp;
 
 #### The Star Plot Visualized
 
@@ -61,7 +92,11 @@ dino_data %>% summarize(r = cor(x,y))
 
 Here we see that the ***linear*** relationship of the data is equal to the above plot. This expresses the same linear relationship as the dinosaur despite having a markedly different visualization of the data.
 
-### Exercise 4
+&nbsp;
+
+## Exercise 4
+
+&nbsp;
 
 #### The Circle Plot Visualized
 
@@ -80,6 +115,23 @@ dino_data %>% summarize(r = cor(x,y))
 
 As could be expected, there is nearly no ***linear*** relationship between the variables x and y, and that relationship is exactly the same as the rest.
 
-### Exercise 5
+&nbsp;
 
-(Add code and narrative as needed. To add R chunks either type out the backticks, curly braces, and the letter `r` or use the Insert chunk button above, with the green +C.)
+## Exercise 5
+
+&nbsp;
+
+These are all 13 data sets visualized and colored.
+```{r fig.width=7, fig.height=13}
+ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
+geom_point()+
+facet_wrap(~ dataset, ncol = 3) + # facet the dataset variable, in 3 cols 
+  theme(legend.position = "none")
+```
+
+These values represent the Pearson's Correlation values for all the data sets.
+
+```{r}
+datasaurus_dozen %>% group_by(dataset) %>% summarize(r = cor(x, y)) %>% print(26)
+```
+
